@@ -33,7 +33,8 @@ class SortedLinkList implements \Iterator
         // Top of the list, easy: put at top
         if (($ascending && $this->head->value > $value)
             || (!$ascending && $this->head->value < $value)) {
-            $this->append($node);
+            $node->next = $this->head;
+            $this->head = $node;
             return;
         }
 
@@ -48,15 +49,6 @@ class SortedLinkList implements \Iterator
         $node->next = $current->next;
         $current->next = $node;
 
-    }
-
-    public function append(int|string|Node $node): void {
-        if (! $node instanceof Node) { // Simply, not a node
-            $node = new Node($node);
-        }
-
-        $node->next = $this->head;
-        $this->head = $node;
     }
 
     #[\Override]
