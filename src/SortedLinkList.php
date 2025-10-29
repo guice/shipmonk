@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GP\Shipmonk;
 
+/**
+ * @implements \Iterator<string>
+ */
 class SortedLinkList implements \Iterator
 {
     public function __construct(
@@ -49,15 +52,15 @@ class SortedLinkList implements \Iterator
     }
 
     #[\Override]
-    public function current(): int|string
+    public function current(): int|string|null
     {
-        return $this->current->value;
+        return $this->current?->value;
     }
 
     #[\Override]
     public function next(): void
     {
-        $this->current = $this->current->next;
+        $this->current = $this->current?->next;
     }
 
     #[\Override]
@@ -94,6 +97,9 @@ class SortedLinkList implements \Iterator
         }
     }
 
+    /**
+     * @return array<int|string> $values
+     */
     public function flatten(): array
     {
         $current = $this->head;
