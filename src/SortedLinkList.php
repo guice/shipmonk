@@ -33,22 +33,23 @@ class SortedLinkList implements \Iterator
         // Top of the list, easy: put at top
         if (($ascending && $this->head->value > $value)
             || (!$ascending && $this->head->value < $value)) {
+            $this->head->previous = $node;
             $node->next = $this->head;
             $this->head = $node;
             return;
         }
 
+        // Now we're going through the list: start with head and transverse until we find the right spot
         $current = $this->head;
-
         while ($current->next !== null &&
             (($ascending && $current->next->value < $value)
                 || (!$ascending && $current->next->value > $value))) {
             $current = $current->next;
         }
 
+        $node->previous = $current;
         $node->next = $current->next;
         $current->next = $node;
-
     }
 
     #[\Override]

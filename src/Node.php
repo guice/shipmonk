@@ -17,6 +17,14 @@ class Node {
                 $this->next = $node;
             }
         },
+        public ?Node         $previous = null {
+            get {
+                return $this->previous;
+            }
+            set(?Node $node) {
+                $this->previous = $node;
+            }
+        },
     ) {}
 
 }
