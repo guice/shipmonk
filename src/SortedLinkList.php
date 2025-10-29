@@ -19,7 +19,7 @@ class SortedLinkList implements \Iterator
 
     public function insert(int|string $value, ?Node $next = null): void {
 
-        $this->validateDataType($value);
+        $this->validate($value);
 
         $node = new Node($value, $next);
 
@@ -30,11 +30,10 @@ class SortedLinkList implements \Iterator
 
         $ascending = ($this->order === Order::ASCENDING);
 
+        // Top of the list, easy: put at top
         if (($ascending && $this->head->value > $value)
             || (!$ascending && $this->head->value < $value)) {
-            $node->next = $this->head;
-            $this->head = $node;
-
+            $this->append($node);
             return;
         }
 
@@ -49,6 +48,15 @@ class SortedLinkList implements \Iterator
         $node->next = $current->next;
         $current->next = $node;
 
+    }
+
+    public function append(int|string|Node $node): void {
+        if (! $node instanceof Node) { // Simply, not a node
+            $node = new Node($node);
+        }
+
+        $node->next = $this->head;
+        $this->head = $node;
     }
 
     #[\Override]
@@ -82,8 +90,10 @@ class SortedLinkList implements \Iterator
         $this->current = $this->head;
     }
 
-    private function validateDataType(int|string $value) : void
+    private function validate(int|string $value) : void
     {
+        // Running it like this allows the ability to set datatype on first node entry
+        //     vs enforcing it on new list
         if ($this->dataType === null) {
             $this->dataType = is_int($value) ? DataType::INT : DataType::STRING;
             return;

@@ -12,7 +12,6 @@ use GP\Shipmonk\SortedLinkList;
 
 class SortedLinkListTest extends TestCase
 {
-
     public function testValidateIterator()
     {
         $tests = [4, 7, 2, 9, 10];
