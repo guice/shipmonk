@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GP\Shipmonk;
 
 /**
- * @implements \Iterator<string>
+ * @implements \Iterator<Node>
  */
 class SortedLinkList implements \Iterator
 {
