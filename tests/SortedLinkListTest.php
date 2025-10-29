@@ -56,7 +56,7 @@ class SortedLinkListTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    #[DataProvider('unsupportedTypesDataProvider')]
+    #[DataProvider('unsupportedDataTypesProvider')]
     public function testUnsupportedDataTypes(mixed $type, string $message): void
     {
         $this->expectExceptionMessage($message);
@@ -96,7 +96,7 @@ class SortedLinkListTest extends TestCase
             [[ 'date', 'banana', 'egg', 'cherry', 'apple'], ['egg', 'date', 'cherry', 'banana', 'apple']],
         ];
     }
-    public static function unsupportedTypesDataProvider(): array {
+    public static function unsupportedDataTypesProvider(): array {
         return [
             [false, 'Argument #1 ($value) must be of type string|int, false given'],
             [[], 'Argument #1 ($value) must be of type string|int, array given'],
